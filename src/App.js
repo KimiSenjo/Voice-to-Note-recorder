@@ -135,7 +135,7 @@ function App() {
         <div className="app-header fade-in">
           <div className="title-with-logo">
             <img 
-              src="/Do TIME.png" 
+              src={process.env.PUBLIC_URL + "/Do TIME.png"} 
               alt="Do Time Logo" 
               className="app-logo"
             />
@@ -221,7 +221,7 @@ function App() {
       <footer className="app-footer mt-12">
         <div className="footer-content">
           <div className="footer-logo">
-            <img src="/Do TIME.png" alt="Do Time Logo" className="footer-logo-img" />
+            <img src={process.env.PUBLIC_URL + "/Do TIME.png"} alt="Do Time Logo" className="footer-logo-img" />
           </div>
           <div className="footer-info">
             <p className="developer">Developed by <span className="font-medium">Michael Jones Mccarthy</span></p>

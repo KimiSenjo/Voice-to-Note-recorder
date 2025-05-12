@@ -1,70 +1,61 @@
-# Getting Started with Create React App
+# Do Time Voice Note App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern voice note-taking application that allows you to record your thoughts with timestamps using speech recognition.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **Voice Recording**: Record notes using your device's microphone
+- **Continuous Recording**: Records until you manually stop
+- **Real-time Transcription**: See your words as you speak
+- **Timestamp Organization**: Each note is saved with its creation time
+- **Local Storage**: Notes are saved in your browser's local storage
+- **Responsive Design**: Works on mobile and desktop devices
+- **Modern UI**: Clean, intuitive interface with animations
 
-### `npm start`
+## Technologies Used
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- React.js
+- Tailwind CSS
+- Web Speech API
+- Local Storage API
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Screenshots
 
-### `npm test`
+![Do Time Voice Note App Screenshot](screenshot.png)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Usage
 
-### `npm run build`
+1. Click "Start Recording" to begin capturing your voice
+2. Speak clearly into your microphone
+3. Click "Stop Recording" when you're finished
+4. Your note will be saved with a timestamp
+5. View all your notes in the grid below
+6. Delete notes you no longer need
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Development
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+This project was created with Create React App and Tailwind CSS.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Installation
 
-### `npm run eject`
+```bash
+# Clone the repository
+git clone https://github.com/KimiSenjo/Voice-to-Note-recorder.git
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+# Navigate to the project directory
+cd Voice-to-Note-recorder
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+# Install dependencies
+npm install
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+# Start the development server
+npm start
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## License
 
-## Learn More
+MIT License
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Developer
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Developed by Michael Jones Mccarthy
