@@ -1,13 +1,265 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom styles for Voice Notes App */
+
+@layer base {
+  body {
+    @apply font-sans bg-gradient-to-br from-blue-50 to-gray-100 text-gray-800 min-h-screen;
+    background-attachment: fixed;
+  }
+  
+  #root {
+    @apply min-h-screen flex flex-col;
+  }
+  
+  /* Add a subtle animated background pattern */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+      radial-gradient(circle at 25% 25%, rgba(59, 130, 246, 0.03) 0%, transparent 50%),
+      radial-gradient(circle at 75% 75%, rgba(59, 130, 246, 0.03) 0%, transparent 50%);
+    animation: subtle-move 20s ease-in-out infinite alternate;
+    pointer-events: none;
+    z-index: -1;
+  }
+  
+  @keyframes subtle-move {
+    0% {
+      background-position: 0% 0%;
+    }
+    100% {
+      background-position: 100% 100%;
+    }
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold text-gray-900;
+  }
+  
+  /* Add a subtle texture overlay to the background */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%239C92AC' fill-opacity='0.05' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: -1;
+  }
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@layer components {
+  .app-container {
+    @apply max-w-3xl mx-auto p-6 flex flex-col min-h-screen;
+  }
+  
+  .app-header {
+    @apply border-b-2 border-gray-200 pb-4 mb-8 flex flex-col items-center;
+  }
+  
+  .title-with-logo {
+    @apply flex items-center justify-center gap-4 mb-4;
+  }
+  
+  .app-logo {
+    @apply h-16 w-auto filter drop-shadow-xl;
+    animation: logo-pulse 3s ease-in-out infinite alternate, 
+               logo-glow 5s ease-in-out infinite;
+  }
+  
+  .note-card {
+    @apply bg-white bg-opacity-90 backdrop-blur-sm rounded-lg shadow-md p-5 transition-all duration-300 hover:shadow-lg border-l-4 border-blue-500 h-full flex flex-col;
+    transform-origin: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .note-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+  
+  .note-card:nth-child(4n+1) {
+    @apply border-blue-500;
+  }
+  
+  .note-card:nth-child(4n+2) {
+    @apply border-green-500;
+  }
+  
+  .note-card:nth-child(4n+3) {
+    @apply border-purple-500;
+  }
+  
+  .note-card:nth-child(4n+4) {
+    @apply border-yellow-500;
+  }
+  
+  .btn-primary {
+    @apply bg-blue-600 text-white px-8 py-3 rounded-full shadow hover:bg-blue-700 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 font-medium text-base;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+  }
+  
+  .btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: 0.5s;
+    z-index: -1;
+  }
+  
+  .btn-primary:hover::before {
+    left: 100%;
+  }
+  
+  .btn-delete {
+    @apply text-red-500 hover:text-red-700 transition-colors duration-200 flex items-center gap-1;
+  }
+  
+  .empty-state {
+    @apply text-gray-500 italic p-8 text-center border-2 border-dashed border-gray-300 rounded-lg bg-gray-50 bg-opacity-70;
+  }
+  
+  .notes-header {
+    @apply text-center;
+  }
+  
+  .listening-animation {
+    @apply relative;
+  }
+  
+  .listening-animation::after {
+    content: '';
+    @apply absolute inset-0 rounded-full border-4 border-red-300 animate-ping opacity-75;
+  }
+  
+  .recording-indicator {
+    @apply inline-block h-4 w-4 rounded-full bg-red-500 mr-3;
+    animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  
+  .recording-card {
+    animation: subtle-glow 2s ease-in-out infinite alternate;
+  }
+  
+  @keyframes subtle-glow {
+    from {
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+    to {
+      box-shadow: 0 10px 15px -3px rgba(239, 68, 68, 0.2), 0 4px 6px -2px rgba(239, 68, 68, 0.1);
+    }
+  }
+}
+
+/* Custom animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes logo-pulse {
+  from {
+    transform: scale(1) rotate(-2deg);
+  }
+  to {
+    transform: scale(1.05) rotate(2deg);
+  }
+}
+
+@keyframes logo-glow {
+  0%, 100% {
+    filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.5));
+  }
+  50% {
+    filter: drop-shadow(0 0 15px rgba(59, 130, 246, 0.8));
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Notes grid layout */
+.notes-grid {
+  @apply grid grid-cols-1 sm:grid-cols-2 gap-4;
+}
+
+/* Footer styles */
+.app-footer {
+  @apply border-t border-gray-200 py-6 px-4 mt-auto;
+}
+
+.footer-content {
+  @apply flex flex-col md:flex-row items-center justify-center gap-4 max-w-3xl mx-auto;
+}
+
+.footer-logo {
+  @apply flex justify-center;
+}
+
+.footer-logo-img {
+  @apply h-12 w-auto filter drop-shadow-md;
+}
+
+.footer-info {
+  @apply text-center md:text-left text-gray-600;
+}
+
+.developer {
+  @apply mb-1;
+}
+
+.contact-info {
+  @apply flex flex-col sm:flex-row gap-3 sm:gap-6 justify-center md:justify-start mb-2;
+}
+
+.contact-link {
+  @apply flex items-center gap-1 text-blue-600 hover:text-blue-800 transition-colors;
+}
+
+.copyright {
+  @apply text-sm text-gray-500;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
